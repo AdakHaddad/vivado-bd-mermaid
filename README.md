@@ -84,6 +84,3 @@ To allow the workflow to push commits:
 - Clock/reset nets are filtered to reduce clutter; AXI is extracted from `connect_bd_intf_net`.
 - Mermaid layout is not identical to Vivado; it’s a best-effort structural view.
 
-## License
-
-Choose a license (MIT/Apache-2.0) if you plan to share publicly.
