@@ -1,0 +1,40 @@
+name: "Vivado BD Tcl to Mermaid"
+description: "Generate Mermaid diagrams from Vivado Block Design Tcl exports and optionally update README."
+inputs:
+  repo-root:
+    description: "Repo root"
+    required: false
+    default: "."
+  out-dir:
+    description: "Output directory for generated .mmd"
+    required: false
+    default: "docs/bd"
+  readme:
+    description: "README file to update"
+    required: false
+    default: "README.md"
+  update-readme:
+    description: "Whether to update README markers"
+    required: false
+    default: "true"
+  args:
+    description: "Extra args to pass to the generator script"
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: Generate Mermaid
+      shell: bash
+      run: |
+        set -euo pipefail
+        python "${{ github.action_path }}/bd_tcl_to_mermaid.py" \
+          --repo-root "${{ inputs.repo-root }}" \
+          --out-dir "${{ inputs.out-dir }}" \
+          --readme "${{ inputs.readme }}" \
+          ${{ inputs.args }}
